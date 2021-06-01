@@ -69,4 +69,4 @@ def callback_worker(call):
         bot.send_message(call.message.chat.id, "have a good day")
 
 
-bot.polling(timeout=60)
+bot.polling()
