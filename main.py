@@ -2,8 +2,14 @@
 import telebot
 from telebot import types
 
+import os
+from dotenv import load_dotenv
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
+print(os.environ['TOKEN'])
+TOKEN = os.environ['TOKEN']
 
-TOKEN = '1830425110:AAGYIMXXspdB63zTy5Wz-aPcbXQ6vQx3jpA'
 
 bot = telebot.TeleBot(TOKEN)
 pol = ''
@@ -33,12 +39,13 @@ def get_pol(message):
 
 def get_act(message):
         global act
+
         while act == 0:
             try:
                 act = int(message.text)
             except Exception:
                 bot.send_message(message.from_user.id, 'Цифрами, пожалуйста')
-        act = int(message.text)
+
         bot.send_message(message.from_user.id, 'Сколько вы весите?')
         bot.register_next_step_handler(message, get_wght)
 
